@@ -1,28 +1,37 @@
 variable "aws_region" {
-  description = "The AWS region to deploy resources into."
+  description = "AWS region"
   type        = string
-  default     = "ap-south-1" # Mumbai
+  default     = "ap-south-1"
 }
 
-variable "environment" {
-  description = "The deployment environment (e.g., dev, prod, staging)."
-  type        = string
-  default     = "dev"
-}
-
-variable "s3_bucket_name" {
-  description = "A unique name for the S3 bucket where files will be uploaded."
+variable "bucket_name" {
+  description = "Name of the S3 bucket"
   type        = string
 }
 
 variable "lambda_function_name" {
-  description = "A unique name for the Lambda function."
+  description = "Name of the Lambda function"
   type        = string
-  default     = "s3-file-logger-lambda"
+  default     = "s3-event-processor"
 }
 
-variable "lambda_image_uri" {
-  description = "The ECR image URI for your containerized Lambda function."
+variable "ecr_repository_uri" {
+  description = "ECR repository URI for Lambda container image"
   type        = string
-  # Example: "ACCOUNT_ID.dkr.ecr.REGION.amazonaws.com/your-repo-name:latest"
+}
+
+variable "image_tag" {
+  description = "Container image tag"
+  type        = string
+  default     = "latest"
+}
+
+variable "common_tags" {
+  description = "Common tags to apply to all resources"
+  type        = map(string)
+  default = {
+    Project     = "S3EventLambda"
+    Environment = "production"
+    ManagedBy   = "Terraform"
+  }
 }

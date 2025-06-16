@@ -1,31 +1,44 @@
-resource "aws_s3_bucket" "this" {
+resource "aws_s3_bucket" "event_bucket" {
   bucket = var.bucket_name
-  tags = {
-    Name        = var.bucket_name
-    Environment = var.environment
+
+  tags = var.tags
+}
+
+resource "aws_s3_bucket_versioning" "event_bucket_versioning" {
+  bucket = aws_s3_bucket.event_bucket.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
-resource "aws_s3_bucket_acl" "this" {
-  bucket = aws_s3_bucket.this.id
-  acl    = "private"
+resource "aws_s3_bucket_server_side_encryption_configuration" "event_bucket_encryption" {
+  bucket = aws_s3_bucket.event_bucket.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
 }
 
-resource "aws_s3_bucket_notification" "this" {
-  bucket = aws_s3_bucket.this.id
+resource "aws_s3_bucket_public_access_block" "event_bucket_pab" {
+  bucket = aws_s3_bucket.event_bucket.id
 
-  lambda_queue {
-    lambda_function_arn = var.lambda_function_arn
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_s3_bucket_notification" "event_notification" {
+  bucket = aws_s3_bucket.event_bucket.id
+
+  lambda_function {
+    lambda_function_arn = var.lambda_arn
     events              = ["s3:ObjectCreated:*"]
+    filter_prefix       = ""
+    filter_suffix       = ""
   }
-}
 
-# The bucket policy is required to allow S3 to invoke the Lambda function.
-# This assumes the Lambda function and S3 bucket are in the same AWS account.
-resource "aws_lambda_permission" "allow_s3_invoke" {
-  statement_id  = "AllowS3InvokeLambda"
-  action        = "lambda:InvokeFunction"
-  function_name = var.lambda_function_name
-  principal     = "s3.amazonaws.com"
-  source_arn    = aws_s3_bucket.this.arn
+  depends_on = [aws_s3_bucket.event_bucket]
 }

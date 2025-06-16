@@ -1,0 +1,8 @@
+# No external dependencies required for this basic implementation
+# Add any additional packages needed for your specific use case
+
+# Example packages you might need:
+# boto3==1.34.0  # AWS SDK (usually available in Lambda runtime)
+# requests==2.31.0  # HTTP requests
+# pillow==10.0.0  # Image processing
+# pandas==2.1.0  # Data processing

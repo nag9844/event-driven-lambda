@@ -1,10 +1,10 @@
-variable "bucket_name" {
-  description = "Name of the S3 bucket"
+variable "lambda_function_name" {
+  description = "Name of the Lambda function"
   type        = string
 }
 
-variable "lambda_arn" {
-  description = "ARN of the Lambda function to trigger"
+variable "s3_bucket_name" {
+  description = "Name of the S3 bucket"
   type        = string
 }
 
