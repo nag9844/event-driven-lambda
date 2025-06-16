@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - 'lambda_container/**'
+      - 'lambdacontainer/**'
 
 env:
   AWS_REGION: ${{ secrets.AWS_REGION || 'ap-south-1' }}
