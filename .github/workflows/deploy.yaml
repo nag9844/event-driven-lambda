@@ -12,6 +12,10 @@ env:
   ECR_REPOSITORY: s3-lambda-processor
   TERRAFORM_VERSION: 1.6.0
 
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
 
 jobs:
   build-and-push:
