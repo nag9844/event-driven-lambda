@@ -16,6 +16,11 @@ on:
     branches:
       - main # Only run for the main branch builds
 
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
 env:
   AWS_REGION: ${{ secrets.AWS_REGION || 'ap-south-1' }}
   S3_BUCKET_NAME: "custom-usecase-bucket" # Must be globally unique
