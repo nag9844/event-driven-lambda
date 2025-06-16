@@ -16,14 +16,9 @@ on:
     branches:
       - main # Only run for the main branch builds
 
-permissions:
-  contents: write
-  pull-requests: write
-  id-token: write
-
 env:
-  AWS_REGION: ${{ secrets.AWS_REGION || 'ap-south-1' }}
-  S3_BUCKET_NAME: "custom-usecase-bucket" # Must be globally unique
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  S3_BUCKET_NAME: "your-unique-s3-bucket-name-12345" # Must be globally unique
   LAMBDA_FUNCTION_NAME: "s3-file-logger-lambda"
 
 jobs:
@@ -117,7 +112,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const output = `#### Terraform Plan 📖
+            const output = `#### Terraform Plan 
             \`\`\`terraform
             ${process.env.PLAN_OUTPUT}
             \`\`\`
