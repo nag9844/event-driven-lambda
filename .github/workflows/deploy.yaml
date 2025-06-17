@@ -99,7 +99,7 @@ jobs:
       run: |
         cat > terraform.tfvars << EOF
         aws_region = "${{ env.AWS_REGION }}"
-        bucket_name = "s3-event-lambda-bucket"
+        bucket_name = "s3-event-lambda-bucket-demo"
         lambda_function_name = "s3-event-processor"
         ecr_repository_uri = "$AWS_ACCOUNT_ID.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/$ECR_REPOSITORY"
         image_tag = "$IMAGE_TAG"
@@ -159,8 +159,8 @@ jobs:
       run: |
         cat > terraform.tfvars << EOF
         aws_region = "${{ env.AWS_REGION }}"
-        # bucket_name = "s3-event-lambda-bucket-${{ github.run_number }}"
-        bucket_name = "s3-event-lambda-bucket"
+        # bucket_name = "s3-event-lambda-bucket-demo-${{ github.run_number }}"
+        bucket_name = "s3-event-lambda-bucket-demo"
         lambda_function_name = "s3-event-processor"
         ecr_repository_uri = "$AWS_ACCOUNT_ID.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/$ECR_REPOSITORY"
         image_tag = "$IMAGE_TAG"
@@ -216,7 +216,7 @@ jobs:
         echo "Test file created at $(date)" > test-file.txt
         
         # Get the bucket name (you might need to store this as an artifact from terraform-apply)
-        BUCKET_NAME="s3-event-lambda-bucket"
+        BUCKET_NAME="s3-event-lambda-bucket-demo"
         
         # Upload test file
         aws s3 cp test-file.txt s3://$BUCKET_NAME/test-file.txt

@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "bucket_name" {
   description = "Name of the S3 bucket"
   type        = string
-  default     = "s3-event-lambda-bucket"
+  default     = "s3-event-lambda-bucket-demo"
 }
 
 variable "lambda_function_name" {
