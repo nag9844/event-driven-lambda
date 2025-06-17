@@ -2,7 +2,7 @@ name: Deploy S3 Event Lambda Infrastructure
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -180,7 +180,7 @@ jobs:
 
     - name: Output Infrastructure Details
       run: |
-        echo "## 🚀 Infrastructure Deployed Successfully!" >> $GITHUB_STEP_SUMMARY
+        echo "## Infrastructure Deployed Successfully!" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### Resources Created:" >> $GITHUB_STEP_SUMMARY
         echo "- **S3 Bucket**: $(terraform output -raw s3_bucket_name)" >> $GITHUB_STEP_SUMMARY
