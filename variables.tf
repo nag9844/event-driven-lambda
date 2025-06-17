@@ -7,6 +7,7 @@ variable "aws_region" {
 variable "bucket_name" {
   description = "Name of the S3 bucket"
   type        = string
+  default     = "s3-event-lambda-bucket"
 }
 
 variable "lambda_function_name" {
@@ -18,6 +19,7 @@ variable "lambda_function_name" {
 variable "ecr_repository_uri" {
   description = "ECR repository URI for Lambda container image"
   type        = string
+  default     = "199570228070.dkr.ecr.ap-south-1.amazonaws.com/s3-lambda-processor"
 }
 
 variable "image_tag" {
