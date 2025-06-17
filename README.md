@@ -1,5 +1,8 @@
 # Event-Driven Lambda from S3 Upload
 
+
+...
+
 This project creates an AWS infrastructure using Terraform that triggers a containerized Lambda function when files are uploaded to an S3 bucket. The Lambda function logs the filename to CloudWatch.
 
 ## Architecture
